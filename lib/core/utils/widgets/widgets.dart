@@ -8,6 +8,7 @@ export 'card/vyra_element_card.dart';
 export 'checkbox/vyra_checkbox.dart';
 export 'chip/vyra_chip.dart';
 export 'container/vyra_icon_container.dart';
+export 'date_picker/vyra_date_picker.dart';
 export 'dropdown/vyra_dropdown.dart';
 export 'expansiontile/vyra_expansiontile.dart';
 export 'image_picker/vyra_image_picker.dart';
