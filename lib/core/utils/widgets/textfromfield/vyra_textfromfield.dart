@@ -23,6 +23,7 @@ class VyraTextFormField extends StatelessWidget {
   final bool obscureText;
   final bool enabled;
   final FocusNode? focusNode;
+  final VoidCallback? onPasswordToggle;
 
   const VyraTextFormField({
     super.key,
@@ -43,11 +44,92 @@ class VyraTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.enabled = true,
     this.focusNode,
+    this.onPasswordToggle,
   });
 
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: enabled
+                  ? Theme.of(context).colorScheme.surface
+                  : Theme.of(context).colorScheme.onSurface,
+              borderRadius: BorderRadius.circular(SizeConstants.s12),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.outline,
+                width: 1,
+              ),
+            ),
+            child: Row(
+              children: [
+                if (prefixIcon != null)
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: SizeConstants.s16,
+                      right: SizeConstants.s10,
+                    ),
+                    child: prefixIcon,
+                  ),
+                Expanded(
+                  child: CupertinoTextFormFieldRow(
+                    controller: controller,
+                    focusNode: focusNode,
+                    keyboardType: keyboardType,
+                    obscureText: obscureText,
+                    maxLines: maxLines,
+                    maxLength: maxLength,
+                    textInputAction: textInputAction,
+                    onChanged: onChanged,
+                    enabled: enabled,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                    decoration: const BoxDecoration(),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 0,
+                      vertical: verticalContentPadding,
+                    ),
+                    placeholder: hintText ?? labelText,
+                    placeholderStyle: Theme.of(context).textTheme.bodyMedium!
+                        .copyWith(
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
+                    validator: validator,
+                  ),
+                ),
+                if (onPasswordToggle != null)
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      right: SizeConstants.s16,
+                      left: SizeConstants.s10,
+                    ),
+                    child: GestureDetector(
+                      onTap: onPasswordToggle,
+                      child: Icon(
+                        obscureText ? Icons.visibility_off : Icons.visibility,
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        size: SizeConstants.s20,
+                      ),
+                    ),
+                  )
+                else if (suffixIcon != null)
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      right: SizeConstants.s16,
+                      left: SizeConstants.s10,
+                    ),
+                    child: suffixIcon,
+                  ),
+              ],
+            ),
+          ),
+        ],
+      );
+    } else {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -57,118 +139,96 @@ class VyraTextFormField extends StatelessWidget {
               child: Text(
                 labelText,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
                 ),
               ),
             ),
-          CupertinoTextFormFieldRow(
+          TextFormField(
             controller: controller,
             focusNode: focusNode,
             keyboardType: keyboardType,
+            expands: expands,
             obscureText: obscureText,
             maxLines: maxLines,
             maxLength: maxLength,
             textInputAction: textInputAction,
+            autocorrect: false,
             onChanged: onChanged,
             enabled: enabled,
-            style: Theme.of(context).textTheme.bodyMedium,
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainerHighest,
-              borderRadius: BorderRadius.circular(SizeConstants.s12),
-              border: Border.all(
-                color: Theme.of(context).colorScheme.outline,
-                width: 1,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              fontSize: 16,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+            textCapitalization: TextCapitalization.none,
+            decoration: InputDecoration(
+              hintText: hintText,
+
+              prefixIcon: prefixIcon,
+              suffixIcon: onPasswordToggle != null
+                  ? GestureDetector(
+                      onTap: onPasswordToggle,
+                      child: Icon(
+                        obscureText ? Icons.visibility_off : Icons.visibility,
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        size: SizeConstants.s20,
+                      ),
+                    )
+                  : suffixIcon,
+              contentPadding: EdgeInsets.symmetric(
+                vertical: verticalContentPadding,
+                horizontal: horizontalContentPadding,
               ),
+              hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.onSecondary,
+                fontSize: 16,
+              ),
+              errorStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+                color: ColorConstants.red,
+                fontWeight: FontWeight.w500,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(SizeConstants.s12),
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.outline,
+                  width: 1.5,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(SizeConstants.s12),
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  width: 1.5,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(SizeConstants.s12),
+                borderSide: BorderSide(color: ColorConstants.accent, width: 2),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(SizeConstants.s12),
+                borderSide: BorderSide(color: ColorConstants.red, width: 1.5),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(SizeConstants.s12),
+                borderSide: BorderSide(color: ColorConstants.red, width: 2),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(SizeConstants.s12),
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
+                  width: 1.5,
+                ),
+              ),
+              filled: true,
+              fillColor: enabled
+                  ? Theme.of(context).colorScheme.surface
+                  : Theme.of(context).colorScheme.onSurface,
             ),
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalContentPadding,
-              vertical: verticalContentPadding,
-            ),
-            placeholder: hintText ?? labelText,
-            placeholderStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
-            prefix: prefixIcon,
             validator: validator,
           ),
         ],
-      );
-    } else {
-      return TextFormField(
-        controller: controller,
-        focusNode: focusNode,
-        keyboardType: keyboardType,
-        expands: expands,
-        obscureText: obscureText,
-        maxLines: maxLines,
-        maxLength: maxLength,
-        textInputAction: textInputAction,
-        autocorrect: false,
-        onChanged: onChanged,
-        enabled: enabled,
-        style: Theme.of(context).textTheme.bodyMedium,
-        textCapitalization: TextCapitalization.none,
-        decoration: InputDecoration(
-          labelText: labelText,
-          hintText: hintText,
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
-          contentPadding: EdgeInsets.symmetric(
-            vertical: verticalContentPadding,
-            horizontal: horizontalContentPadding,
-          ),
-          labelStyle: Theme.of(
-            context,
-          ).textTheme.bodyMedium!.copyWith(color: ColorConstants.grey500),
-          floatingLabelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-            color: ColorConstants.accent,
-            fontWeight: FontWeight.w500,
-          ),
-          hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
-          errorStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-            color: ColorConstants.red,
-            fontWeight: FontWeight.w500,
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(SizeConstants.s12),
-            borderSide: const BorderSide(color: ColorConstants.accent),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(SizeConstants.s12),
-            borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.outline,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(SizeConstants.s12),
-            borderSide: const BorderSide(
-              color: ColorConstants.accent,
-              width: 2,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(SizeConstants.s12),
-            borderSide: const BorderSide(color: ColorConstants.red, width: 2),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(SizeConstants.s12),
-            borderSide: const BorderSide(color: ColorConstants.red, width: 2),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(SizeConstants.s12),
-            borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-          ),
-          filled: true,
-          fillColor: enabled
-              ? Theme.of(context).colorScheme.surface
-              : Theme.of(context).colorScheme.onSurface,
-        ),
-        validator: validator,
       );
     }
   }

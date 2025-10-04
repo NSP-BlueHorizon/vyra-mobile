@@ -4,6 +4,7 @@ export 'bottom_navigation/vyra_bottom_navigation.dart';
 export 'button/action_button/vyra_action_button.dart';
 export 'button/floating_action_button/vyra_floating_action_button.dart';
 export 'button/text_button/vyra_text_button.dart';
+export 'card/vyra_element_card.dart';
 export 'checkbox/vyra_checkbox.dart';
 export 'chip/vyra_chip.dart';
 export 'container/vyra_icon_container.dart';

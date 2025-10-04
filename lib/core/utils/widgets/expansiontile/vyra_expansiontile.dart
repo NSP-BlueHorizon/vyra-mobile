@@ -19,7 +19,7 @@ class VyraExpansiontile extends StatelessWidget {
     return ExpansionTile(
       expandedAlignment: Alignment.centerLeft,
       tilePadding: EdgeInsets.zero,
-
+      collapsedIconColor: Theme.of(context).colorScheme.onSecondary,
       childrenPadding: const EdgeInsets.symmetric(
         horizontal: SizeConstants.s10,
       ),

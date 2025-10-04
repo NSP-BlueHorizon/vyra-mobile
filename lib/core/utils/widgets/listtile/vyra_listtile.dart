@@ -10,6 +10,7 @@ class VyraListTile extends StatelessWidget {
   final Widget? trailing;
   final bool showTrailingArrow;
   final bool showHeader;
+  final double? borderRadius;
 
   const VyraListTile({
     super.key,
@@ -19,47 +20,56 @@ class VyraListTile extends StatelessWidget {
     this.trailing,
     this.showHeader = false,
     this.showTrailingArrow = false,
+    this.borderRadius,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onTap,
-      hoverColor: ColorConstants.transparent,
-      splashColor: ColorConstants.transparent,
-      selectedTileColor: ColorConstants.transparent,
-      selectedColor: ColorConstants.transparent,
-      focusColor: ColorConstants.transparent,
-      tileColor: ColorConstants.transparent,
-      contentPadding: const EdgeInsets.only(
-        top: SizeConstants.s4,
-        right: SizeConstants.s8,
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.onSurface,
+        borderRadius: BorderRadius.circular(borderRadius ?? SizeConstants.s12),
       ),
-      leading: leading,
-      visualDensity: VisualDensity.compact,
-      title: Text(title, style: Theme.of(context).textTheme.bodyLarge),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (trailing != null) ...[
-            trailing!,
-            const VyraSizedBox(width: SizeConstants.s5),
-            showTrailingArrow
+      child: ListTile(
+        onTap: onTap,
+        hoverColor: ColorConstants.transparent,
+        splashColor: ColorConstants.transparent,
+        selectedTileColor: ColorConstants.transparent,
+        selectedColor: ColorConstants.transparent,
+        focusColor: ColorConstants.transparent,
+        tileColor: ColorConstants.transparent,
+        minVerticalPadding: SizeConstants.s14,
+        contentPadding: const EdgeInsets.only(
+          top: SizeConstants.s4,
+          right: SizeConstants.s16,
+          left: SizeConstants.s16,
+        ),
+        leading: leading,
+        visualDensity: VisualDensity.compact,
+        title: Text(title, style: Theme.of(context).textTheme.bodyLarge),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (trailing != null) ...[
+              trailing!,
+              const VyraSizedBox(width: SizeConstants.s5),
+              showTrailingArrow
+                  ? Icon(
+                      IconConstants.forward,
+                      size: SizeConstants.s18,
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    )
+                  : const SizedBox(),
+            ],
+            trailing == null && showTrailingArrow
                 ? Icon(
                     IconConstants.forward,
-                    size: SizeConstants.s18,
+                    size: SizeConstants.s20,
                     color: Theme.of(context).colorScheme.onSecondary,
                   )
                 : const SizedBox(),
           ],
-          trailing == null && showTrailingArrow
-              ? Icon(
-                  IconConstants.forward,
-                  size: SizeConstants.s20,
-                  color: Theme.of(context).colorScheme.onSecondary,
-                )
-              : const SizedBox(),
-        ],
+        ),
       ),
     );
   }

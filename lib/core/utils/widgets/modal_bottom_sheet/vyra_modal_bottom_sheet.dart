@@ -23,6 +23,7 @@ Future<T?> vyraModalBottomSheet<T>({
     context: context,
     builder: (_) => Container(
       width: double.infinity,
+      color: Theme.of(context).colorScheme.surface,
       margin: const EdgeInsets.only(
         top: SizeConstants.s8,
         left: SizeConstants.s24,
@@ -39,10 +40,7 @@ Future<T?> vyraModalBottomSheet<T>({
               Text(title, style: Theme.of(context).textTheme.titleLarge),
               Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurface
-                      .withValues(alpha: 0.4),
+                  color: Theme.of(context).colorScheme.onSurface,
                   shape: BoxShape.circle,
                 ),
                 child: IconButton(

@@ -22,7 +22,7 @@ class _VyraBottomNavigationState extends State<VyraBottomNavigation> {
     if (Platform.isIOS) {
       return CupertinoTabBar(
         height: MediaQuery.sizeOf(context).height * 0.075,
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        backgroundColor: Theme.of(context).colorScheme.onSurface,
         activeColor: Theme.of(context).colorScheme.primary,
         inactiveColor: Theme.of(context).colorScheme.onSecondary,
         currentIndex: context.watch<MainCubit>().state.currentIndex,
