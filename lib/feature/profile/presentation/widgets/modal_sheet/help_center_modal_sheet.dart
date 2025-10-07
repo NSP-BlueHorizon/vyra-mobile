@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:vyra/feature/settings/data/models/help_center_model.dart';
+import 'package:vyra/feature/profile/data/models/help_center_model.dart';
 import 'package:vyra/l10n/app_localizations.dart';
 
 import '../../../../../core/utils/constants/constants.dart';

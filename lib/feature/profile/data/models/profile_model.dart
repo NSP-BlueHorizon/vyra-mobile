@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SettingsModel {
+class ProfileModel {
   final IconData icon;
   final String title;
   final VoidCallback? onTap;
   final Widget? trailing;
 
-  const SettingsModel({
+  const ProfileModel({
     required this.icon,
     required this.title,
     this.onTap,
@@ -16,7 +16,7 @@ class SettingsModel {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is SettingsModel &&
+    return other is ProfileModel &&
         other.icon == icon &&
         other.title == title &&
         other.onTap == onTap &&
@@ -29,6 +29,6 @@ class SettingsModel {
 
   @override
   String toString() {
-    return 'SettingsModel(icon: $icon, title: $title, onTap: $onTap, trailing: $trailing)';
+    return 'ProfileModel(icon: $icon, title: $title, onTap: $onTap, trailing: $trailing)';
   }
 }
