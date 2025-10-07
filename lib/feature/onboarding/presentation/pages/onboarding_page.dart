@@ -15,35 +15,29 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => OnboardingCubit(),
-      child: Builder(
-        builder: (context) {
-          return Stack(
-            children: [
-              PageView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: context.read<OnboardingCubit>().state.controller,
-                onPageChanged: (index) {
-                  context.read<OnboardingCubit>().onPageChange(index: index);
-                },
-                children: AssetConstants.onboardingImages
-                    .map(
-                      (image) => Image.asset(
-                        image,
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.fitWidth,
-                        alignment: Alignment.topCenter,
-                      ),
-                    )
-                    .toList(),
-              ),
-              body(context),
-            ],
-          );
-        },
-      ),
+    return Stack(
+      children: [
+        PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: context.read<OnboardingCubit>().state.controller,
+          onPageChanged: (index) {
+            context.read<OnboardingCubit>().onPageChange(index: index);
+          },
+          children:
+              AssetConstants.onboardingImages
+                  .map(
+                    (image) => Image.asset(
+                      image,
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.fitWidth,
+                      alignment: Alignment.topCenter,
+                    ),
+                  )
+                  .toList(),
+        ),
+        body(context),
+      ],
     );
   }
 
@@ -60,15 +54,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
         description: AppLocalizations.of(context)!.onboardingTwoDescription,
       ),
       OnboardingWidget(
+        isSkipable: false,
         title: AppLocalizations.of(context)!.onboardingThreeTitle,
         hashtag: AppLocalizations.of(context)!.onboardingThreeHashtag,
         description: AppLocalizations.of(context)!.onboardingThreeDescription,
-      ),
-      OnboardingWidget(
-        isSkipable: false,
-        title: AppLocalizations.of(context)!.onboardingFourTitle,
-        hashtag: AppLocalizations.of(context)!.onboardingFourHashtag,
-        description: AppLocalizations.of(context)!.onboardingFourDescription,
       ),
     ];
 

@@ -3,7 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:vyra/core/utils/constants/constants.dart';
 import 'package:vyra/core/utils/routes/route_generator.dart';
+import 'package:vyra/feature/auth/presentation/cubits/auth_cubit.dart';
+import 'package:vyra/feature/auth/presentation/cubits/auth_state.dart';
+import 'package:vyra/feature/map/presentation/cubits/map_cubit.dart';
 import 'package:vyra/feature/onboarding/presentation/cubits/onboarding_cubit.dart';
+import 'package:vyra/injection_container.dart';
 import 'package:vyra/l10n/app_localizations.dart';
 
 import '../../../../core/utils/enums/enums.dart';
@@ -25,17 +29,32 @@ class OnboardingWidget extends StatelessWidget {
     this.nextOnTap,
   });
 
+  Future<void> _navigateAfterOnboarding(BuildContext context) async {
+    final hasLocationPermission =
+        await context.read<MapCubit>().checkLocationPermissionStatus();
+
+    final authCubit = context.read<AuthCubit>().state.status;
+
+    if (hasLocationPermission && authCubit == AuthStatus.authenticated) {
+      RouteGenerator.replaceWith(Routes.home);
+    } else {
+      RouteGenerator.replaceWith(Routes.signup);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: context.read<OnboardingCubit>(),
+      value: sl.get<OnboardingCubit>(),
       child: Builder(
         builder: (context) {
           return Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(SizeConstants.s40),
             ),
-            margin: EdgeInsets.only(top: MediaQuery.sizeOf(context).height / 2),
+            margin: EdgeInsets.only(
+              top: MediaQuery.sizeOf(context).height / 2.5,
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: SizeConstants.s30,
@@ -51,11 +70,9 @@ class OnboardingWidget extends StatelessWidget {
                       dotWidth: SizeConstants.s10,
                       dotHeight: SizeConstants.s10,
                     ),
-                    controller: context
-                        .watch<OnboardingCubit>()
-                        .state
-                        .controller,
-                    count: 4,
+                    controller:
+                        context.watch<OnboardingCubit>().state.controller,
+                    count: 3,
                   ),
                   const VyraSizedBox(height: SizeConstants.s30),
                   Text(title, style: Theme.of(context).textTheme.titleLarge),
@@ -63,7 +80,7 @@ class OnboardingWidget extends StatelessWidget {
                   Text(
                     hashtag,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
+                      color: Theme.of(context).colorScheme.onSecondary,
                       height: 1,
                     ),
                   ),
@@ -76,34 +93,34 @@ class OnboardingWidget extends StatelessWidget {
                   const Spacer(),
                   isSkipable
                       ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                RouteGenerator.replaceWith(Routes.home);
-                              },
-                              child: Text(
-                                AppLocalizations.of(context)!.skip,
-                                style: Theme.of(context).textTheme.bodyMedium!
-                                    .copyWith(color: ColorConstants.grey500),
-                              ),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              _navigateAfterOnboarding(context);
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.skip,
+                              style: Theme.of(context).textTheme.bodyMedium!
+                                  .copyWith(color: ColorConstants.grey500),
                             ),
-                            VyraActionButton(
-                              text: AppLocalizations.of(context)!.next,
-                              width: MediaQuery.sizeOf(context).width * 0.3,
-                              onTap: () {
-                                context.read<OnboardingCubit>().nextPage();
-                              },
-                            ),
-                          ],
-                        )
+                          ),
+                          VyraActionButton(
+                            text: AppLocalizations.of(context)!.next,
+                            width: MediaQuery.sizeOf(context).width * 0.3,
+                            onTap: () {
+                              context.read<OnboardingCubit>().nextPage();
+                            },
+                          ),
+                        ],
+                      )
                       : VyraActionButton(
-                          text: AppLocalizations.of(context)!.getStarted,
-                          width: double.infinity,
-                          onTap: () {
-                            RouteGenerator.replaceWith(Routes.home);
-                          },
-                        ),
+                        text: AppLocalizations.of(context)!.getStarted,
+                        width: double.infinity,
+                        onTap: () {
+                          _navigateAfterOnboarding(context);
+                        },
+                      ),
                 ],
               ),
             ),
