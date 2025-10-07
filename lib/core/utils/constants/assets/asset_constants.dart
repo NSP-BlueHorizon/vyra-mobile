@@ -13,20 +13,20 @@ class AssetConstants {
   static const String turkishFlag = 'assets/images/flags/turkish_flag.png';
   static const String italianFlag = 'assets/images/flags/italian_flag.png';
 
-  // * Icon Assets
-
   // * Onboarding Images
   static const List<String> onboardingImages = [
-    'assets/images/onboarding/onboarding_1.png',
-    'assets/images/onboarding/onboarding_2.png',
-    'assets/images/onboarding/onboarding_3.png',
-    'assets/images/onboarding/onboarding_4.png',
+    'assets/images/onboarding/onboarding_1.jpg',
+    'assets/images/onboarding/onboarding_2.jpg',
+    'assets/images/onboarding/onboarding_3.jpg',
   ];
 
   // * Illustrations
 
   static const String notificationIllustration =
       'assets/illustrations/notification/notification.png';
+
+  static const String locationIllustration =
+      'assets/illustrations/location/location_permission.png';
 
   static const String systemIllustration =
       'assets/illustrations/theme/system.png';

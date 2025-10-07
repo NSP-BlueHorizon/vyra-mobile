@@ -10,19 +10,18 @@ class IconConstants {
   static const IconData done = Icons.done_rounded;
   static const IconData add = Icons.add_rounded;
   static const IconData currentLocation = Icons.my_location_rounded;
+  static const IconData edit = Icons.edit_outlined;
+  static const IconData lastSignIn = Icons.access_time_rounded;
 
   // * Bottom Navigation Icons - Material
   static const IconData materialNavigationOutlined = Icons.navigation_outlined;
   static const IconData materialNavigationFilled = Icons.navigation;
-  static const IconData materialSettingsOutlined = Icons.settings_outlined;
-  static const IconData materialSettingsFilled = Icons.settings;
   static const IconData materialProfileOutlined = Icons.person_outline;
   static const IconData materialProfileFilled = Icons.person;
 
   // * Bottom Navigation Icons - Cupertino
   static const IconData cupertinoNavigationFilled =
       CupertinoIcons.location_fill;
-  static const IconData cupertinoSettingsFilled = CupertinoIcons.settings;
   static const IconData cupertinoProfileFilled = CupertinoIcons.person_fill;
 
   // * Other Icons
@@ -41,4 +40,17 @@ class IconConstants {
   static const IconData fullName = Icons.badge_outlined;
   static const IconData birthDate = Icons.cake_outlined;
   static const IconData confirmPassword = Icons.lock_outline_rounded;
+
+  // * Map & Route Icons
+  static const IconData walking = Icons.directions_walk;
+  static const IconData cycling = Icons.directions_bike;
+  static const IconData leaf = Icons.eco_outlined;
+  static const IconData speed = Icons.speed;
+  static const IconData route = Icons.route;
+
+  // * Season Icons
+  static const IconData spring = Icons.local_florist_rounded;
+  static const IconData summer = Icons.wb_sunny_rounded;
+  static const IconData fall = Icons.park_rounded;
+  static const IconData winter = Icons.ac_unit_rounded;
 }
