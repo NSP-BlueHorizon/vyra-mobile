@@ -20,7 +20,7 @@ ThemeData darkTheme = ThemeData(
       ),
     ),
   ),
-  scaffoldBackgroundColor: ColorConstants.darkGrey,
+  scaffoldBackgroundColor: ColorConstants.darkBackground,
   splashColor: ColorConstants.transparent,
   highlightColor: ColorConstants.transparent,
   colorScheme: const ColorScheme(
