@@ -11,6 +11,10 @@ class MainCubit extends HydratedCubit<MainState> {
     emit(state.copyWith(currentIndex: index));
   }
 
+  void resetIndex() {
+    emit(state.copyWith(currentIndex: 0));
+  }
+
   void changeTheme(ThemeMode themeMode) {
     emit(state.copyWith(themeMode: themeMode));
   }

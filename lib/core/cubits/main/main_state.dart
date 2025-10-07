@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:vyra/core/utils/enums/enums.dart';
 
 part 'main_state.freezed.dart';
 
