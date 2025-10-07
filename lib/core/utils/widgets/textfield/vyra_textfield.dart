@@ -16,6 +16,10 @@ class VyraTextField extends StatelessWidget {
   final bool expands;
   final String? hintText;
   final FocusNode? focusNode;
+  final Color? backgroundColor;
+  final double? borderRadius;
+  final Color? hintTextColor;
+  final void Function(String)? onSubmitted;
 
   const VyraTextField({
     super.key,
@@ -31,10 +35,17 @@ class VyraTextField extends StatelessWidget {
     this.focusNode,
     this.textAlign = TextAlign.justify,
     this.keyboardType = TextInputType.text,
+    this.backgroundColor,
+    this.borderRadius,
+    this.hintTextColor,
+    this.onSubmitted,
   });
 
   @override
   Widget build(BuildContext context) {
+    final effectiveBorderRadius = borderRadius ?? SizeConstants.s8;
+    final effectiveHintTextColor = hintTextColor ?? ColorConstants.grey500;
+
     if (Platform.isAndroid) {
       return TextField(
         textAlign: textAlign,
@@ -45,12 +56,15 @@ class VyraTextField extends StatelessWidget {
         keyboardType: keyboardType,
         enabled: enabled,
         textInputAction: textInputAction,
+        onSubmitted: onSubmitted,
         style: Theme.of(
           context,
         ).textTheme.labelMedium!.copyWith(height: SizeConstants.s2),
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.never,
           enabled: enabled,
+          filled: backgroundColor != null,
+          fillColor: backgroundColor,
           suffix: Padding(
             padding: const EdgeInsets.only(right: SizeConstants.s10),
             child: suffix,
@@ -63,18 +77,19 @@ class VyraTextField extends StatelessWidget {
             hintText!,
             style: Theme.of(
               context,
-            ).textTheme.labelMedium!.copyWith(color: ColorConstants.grey500),
+            ).textTheme.labelMedium!.copyWith(color: effectiveHintTextColor),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(SizeConstants.s8),
+            borderRadius: BorderRadius.circular(effectiveBorderRadius),
             borderSide: const BorderSide(color: ColorConstants.grey300),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: ColorConstants.grey300),
-            borderRadius: BorderRadius.circular(SizeConstants.s8),
+            borderRadius: BorderRadius.circular(effectiveBorderRadius),
           ),
-          border: const OutlineInputBorder(
-            borderSide: BorderSide(color: ColorConstants.grey300),
+          border: OutlineInputBorder(
+            borderSide: const BorderSide(color: ColorConstants.grey300),
+            borderRadius: BorderRadius.circular(effectiveBorderRadius),
           ),
         ),
       );
@@ -82,11 +97,20 @@ class VyraTextField extends StatelessWidget {
       return CupertinoTextField(
         padding: const EdgeInsets.all(SizeConstants.s16),
         placeholder: hintText,
+        placeholderStyle: Theme.of(
+          context,
+        ).textTheme.labelMedium!.copyWith(color: effectiveHintTextColor),
         focusNode: focusNode,
         textAlign: textAlign,
         maxLines: maxLines,
         enabled: enabled,
         textInputAction: textInputAction,
+        onSubmitted: onSubmitted,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(effectiveBorderRadius),
+          border: Border.all(color: ColorConstants.grey300),
+        ),
         prefix: Padding(
           padding: const EdgeInsets.only(left: SizeConstants.s10),
           child: prefix,

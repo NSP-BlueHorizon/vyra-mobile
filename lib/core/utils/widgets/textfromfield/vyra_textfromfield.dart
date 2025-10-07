@@ -60,8 +60,8 @@ class VyraTextFormField extends StatelessWidget {
                   : Theme.of(context).colorScheme.onSurface,
               borderRadius: BorderRadius.circular(SizeConstants.s12),
               border: Border.all(
-                color: Theme.of(context).colorScheme.outline,
-                width: 1,
+                color: Theme.of(context).colorScheme.onSurface,
+                width: 1.2,
               ),
             ),
             child: Row(
@@ -190,36 +190,43 @@ class VyraTextFormField extends StatelessWidget {
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(SizeConstants.s12),
-                borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.outline,
+                borderSide: const BorderSide(
+                  color: ColorConstants.grey300,
                   width: 1.5,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(SizeConstants.s12),
-                borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.onSecondary,
+                borderSide: const BorderSide(
+                  color: ColorConstants.grey300,
                   width: 1.5,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(SizeConstants.s12),
-                borderSide: BorderSide(color: ColorConstants.accent, width: 2),
+                borderSide: const BorderSide(
+                  color: ColorConstants.accent,
+                  width: 2,
+                ),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(SizeConstants.s12),
-                borderSide: BorderSide(color: ColorConstants.red, width: 1.5),
+                borderSide: const BorderSide(
+                  color: ColorConstants.red,
+                  width: 1.5,
+                ),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(SizeConstants.s12),
-                borderSide: BorderSide(color: ColorConstants.red, width: 2),
+                borderSide: const BorderSide(
+                  color: ColorConstants.red,
+                  width: 2,
+                ),
               ),
               disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(SizeConstants.s12),
                 borderSide: BorderSide(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.outline.withValues(alpha: 0.5),
+                  color: ColorConstants.grey300.withValues(alpha: 0.5),
                   width: 1.5,
                 ),
               ),

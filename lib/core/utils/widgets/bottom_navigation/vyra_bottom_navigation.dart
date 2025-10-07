@@ -40,11 +40,11 @@ class _VyraBottomNavigationState extends State<VyraBottomNavigation> {
           ),
           BottomNavigationBarItem(
             icon: const Icon(
-              IconConstants.cupertinoSettingsFilled,
+              IconConstants.cupertinoProfileFilled,
               size: SizeConstants.s30,
             ),
 
-            label: localization.settings,
+            label: localization.profile,
           ),
         ],
       );
@@ -75,14 +75,14 @@ class _VyraBottomNavigationState extends State<VyraBottomNavigation> {
             ),
             BottomNavigationBarItem(
               icon: const Icon(
-                IconConstants.materialSettingsOutlined,
+                IconConstants.materialProfileOutlined,
                 size: SizeConstants.s30,
               ),
               activeIcon: const Icon(
-                IconConstants.materialSettingsFilled,
+                IconConstants.materialProfileFilled,
                 size: SizeConstants.s30,
               ),
-              label: localization.settings,
+              label: localization.profile,
             ),
           ],
         ),

@@ -25,7 +25,7 @@ class VyraFloatingAddButton extends StatelessWidget {
             vyraModalBottomSheet(
               context: context,
               title: localization.create,
-              child: const Text('Create Modal Sheet'),
+              child: Text(AppLocalizations.of(context)!.createModalSheet),
             );
           },
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../../constants/constants.dart';
 
@@ -26,14 +25,12 @@ class VyraFloatingActionButton extends StatelessWidget {
       backgroundColor: Theme.of(
         context,
       ).colorScheme.onPrimary.withValues(alpha: 0.7),
+      onPressed: onPressed,
       child: Icon(
         IconConstants.currentLocation,
         size: SizeConstants.s25,
         color: Theme.of(context).colorScheme.secondary,
       ),
-      onPressed: () async {
-        HapticFeedback.mediumImpact();
-      },
     );
   }
 }

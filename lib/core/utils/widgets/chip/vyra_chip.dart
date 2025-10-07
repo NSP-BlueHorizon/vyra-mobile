@@ -23,27 +23,29 @@ class VyraChip extends StatelessWidget {
       showCheckmark: false,
       color: WidgetStateProperty.all(
         isSelected
-            ? Theme.of(context).colorScheme.primary
+            ? ColorConstants.accent.withValues(alpha: 0.1)
             : Theme.of(context).colorScheme.onSurface,
       ),
       label: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          icon != null
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (icon != null) ...[
-                      icon!,
-                      const VyraSizedBox(width: SizeConstants.s8),
-                    ],
-                  ],
-                )
-              : const SizedBox(),
+          if (icon != null) ...[
+            Icon(
+              icon!.icon,
+              color: isSelected ? ColorConstants.accent : icon!.color,
+            ),
+            const VyraSizedBox(width: SizeConstants.s8),
+          ],
           Text(
             label,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyMedium!.copyWith(color: ColorConstants.white),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color:
+                  isSelected
+                      ? ColorConstants.accent
+                      : Theme.of(context).colorScheme.onSecondary,
+            ),
           ),
         ],
       ),

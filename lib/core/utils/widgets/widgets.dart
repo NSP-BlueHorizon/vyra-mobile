@@ -15,6 +15,7 @@ export 'image_picker/vyra_image_picker.dart';
 export 'listtile/vyra_listtile.dart';
 export 'loading_indicator/vyra_loading_indicator.dart';
 export 'modal_bottom_sheet/vyra_modal_bottom_sheet.dart';
+export 'popup/vyra_edit_field_popup.dart';
 export 'radio/vyra_radio.dart';
 export 'shimmer/vyra_shimmer.dart';
 export 'sizedbox/vyra_sizedbox.dart';

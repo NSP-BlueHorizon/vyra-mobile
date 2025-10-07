@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:vyra/core/utils/constants/constants.dart';
 import 'package:vyra/core/utils/routes/route_generator.dart';
 import 'package:vyra/core/utils/widgets/sizedbox/vyra_sizedbox.dart';
+import 'package:vyra/l10n/app_localizations.dart';
 
 class VyraDropdownItem {
   final dynamic value;
@@ -53,22 +54,23 @@ class VyraDropDown extends StatelessWidget {
           ),
         ),
         hintText: hintText,
-        dropdownMenuEntries: items.map((item) {
-          return DropdownMenuEntry(
-            value: item.value,
-            label: item.label,
-            style: ButtonStyle(
-              foregroundColor: WidgetStatePropertyAll(
-                Theme.of(context).colorScheme.secondary,
-              ),
-              textStyle: WidgetStatePropertyAll(
-                Theme.of(
-                  context,
-                ).textTheme.labelMedium!.copyWith(color: Colors.red),
-              ),
-            ),
-          );
-        }).toList(),
+        dropdownMenuEntries:
+            items.map((item) {
+              return DropdownMenuEntry(
+                value: item.value,
+                label: item.label,
+                style: ButtonStyle(
+                  foregroundColor: WidgetStatePropertyAll(
+                    Theme.of(context).colorScheme.secondary,
+                  ),
+                  textStyle: WidgetStatePropertyAll(
+                    Theme.of(
+                      context,
+                    ).textTheme.labelMedium!.copyWith(color: Colors.red),
+                  ),
+                ),
+              );
+            }).toList(),
       );
     } else {
       return GestureDetector(
@@ -83,7 +85,7 @@ class VyraDropDown extends StatelessWidget {
                     await HapticFeedback.mediumImpact();
                     RouteGenerator.pop();
                   },
-                  child: const Text('Close'),
+                  child: Text(AppLocalizations.of(context)!.close),
                 ),
                 actions: [
                   SizedBox(
@@ -94,9 +96,10 @@ class VyraDropDown extends StatelessWidget {
                       ),
                       itemExtent: SizeConstants.s50,
                       onSelectedItemChanged: (index) => onSelected(index),
-                      children: items
-                          .map((e) => Center(child: Text(e.label)))
-                          .toList(),
+                      children:
+                          items
+                              .map((e) => Center(child: Text(e.label)))
+                              .toList(),
                     ),
                   ),
                 ],
@@ -125,9 +128,10 @@ class VyraDropDown extends StatelessWidget {
               Text(
                 hintText,
                 style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                  color: hintText.contains('Select')
-                      ? Theme.of(context).colorScheme.onSecondary
-                      : Theme.of(context).colorScheme.secondary,
+                  color:
+                      hintText.contains('Select')
+                          ? Theme.of(context).colorScheme.onSecondary
+                          : Theme.of(context).colorScheme.secondary,
                 ),
               ),
               const Spacer(),
