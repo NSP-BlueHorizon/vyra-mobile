@@ -25,7 +25,6 @@ class LanguagePage extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  // Header section with illustration and text
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,8 +56,9 @@ class LanguagePage extends StatelessWidget {
                         horizontal: SizeConstants.s16,
                       ),
                       itemCount: Languages.all.length,
-                      separatorBuilder: (context, index) =>
-                          const VyraSizedBox(height: SizeConstants.s15),
+                      separatorBuilder:
+                          (context, index) =>
+                              const VyraSizedBox(height: SizeConstants.s15),
                       itemBuilder: (context, index) {
                         final language = Languages.all[index];
                         final isSelected =
@@ -71,13 +71,14 @@ class LanguagePage extends StatelessWidget {
                             height: SizeConstants.s30,
                           ),
                           title: language.name,
-                          trailing: isSelected
-                              ? const Icon(
-                                  IconConstants.done,
-                                  color: ColorConstants.accent,
-                                  size: SizeConstants.s28,
-                                )
-                              : null,
+                          trailing:
+                              isSelected
+                                  ? const Icon(
+                                    IconConstants.done,
+                                    color: ColorConstants.accent,
+                                    size: SizeConstants.s28,
+                                  )
+                                  : null,
                           onTap: () {
                             context.read<MainCubit>().changeLanguage(language);
                           },
@@ -88,7 +89,6 @@ class LanguagePage extends StatelessWidget {
 
                   const VyraSizedBox(height: SizeConstants.s16),
 
-                  // Bottom action button - always visible
                   VyraActionButton(
                     text: AppLocalizations.of(context)!.next,
                     width: double.infinity,
