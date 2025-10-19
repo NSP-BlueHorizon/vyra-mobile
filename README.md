@@ -9,7 +9,7 @@ Beautiful, localized Flutter app with Mapbox-powered maps, authentication, onboa
 - **🗺️ Maps (Mapbox)**: Routes, heatmaps, predictions, simulations
 - **📍 Location**: Permission handling and live location access
 - **🌓 Theming**: Light/Dark mode with dynamic theme switching
-- **🌐 Localization (i18n)**: EN, DE, ES, FR, IT, PT, RU, TR
+- **🌐 Localization (l10n)**: EN, DE, ES, FR, IT, PT, RU, TR
 - **🧠 State Management**: `flutter_bloc` + `hydrated_bloc`
 - **🧩 DI Container**: `get_it`
 - **📦 Networking**: `dio`
